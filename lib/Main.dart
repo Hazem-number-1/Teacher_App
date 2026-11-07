@@ -22,7 +22,7 @@ class TeacherApp extends StatelessWidget {
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'إدارة سنتر أستاذ أحمد الخولي',
+          title: 'إدارة سنتر الأستاذة رانيا حمدي',
           themeMode: currentMode,
           theme: ThemeData(
             useMaterial3: true,
@@ -38,14 +38,14 @@ class TeacherApp extends StatelessWidget {
             cardColor: const Color(0xFF0F1720),
             fontFamily: 'Cairo',
           ),
-          home: const SplashScreen(teacherName: 'أستاذ أحمد الخولي'),
+          home: const SplashScreen(teacherName: 'الأستاذة رانيا حمدي'),
         );
       },
     );
   }
 }
 
-// ================= شاشة الترحيب (7 ثواني مع الكرات المتحركة وتوقيع المطور) =================
+// ================= شاشة الترحيب =================
 class SplashScreen extends StatefulWidget {
   final String teacherName;
   const SplashScreen({super.key, required this.teacherName});
@@ -104,7 +104,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 const SizedBox(height: 24),
                 Text(widget.teacherName, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white)),
                 const SizedBox(height: 8),
-                const Text('الأول على كلية الرياضيات 🌟', style: TextStyle(fontSize: 16, color: Colors.cyanAccent, fontWeight: FontWeight.w600)),
+                const Text('الأول على كلية التربية 🌟', style: TextStyle(fontSize: 16, color: Colors.cyanAccent, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 30),
                 const Text('صنع بواسطة: حازم ناصر عبدالظاهر\n📞 01127485412', textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Colors.grey)),
                 const SizedBox(height: 30),
@@ -226,7 +226,7 @@ class Student {
   bool isPresent;
   String attendanceTime;
   Map<String, bool> paidMonths;
-  double customPaidAmount; // المبلغ الإجمالي المدفوع للتحقق من الزيادة والنقصان
+  double customPaidAmount;
 
   Student({
     required this.name,
@@ -237,9 +237,7 @@ class Student {
     Map<String, bool>? paidMonths,
     this.customPaidAmount = 0.0,
   }) : paidMonths = paidMonths ?? {
-          // الترم الأول
           'سبتمبر (ترم 1)': false, 'أكتوبر (ترم 1)': false, 'نوفمبر (ترم 1)': false, 'ديسمبر (ترم 1)': false, 'يناير (ترم 1)': false,
-          // الترم الثاني
           'فبراير (ترم 2)': false, 'مارس (ترم 2)': false, 'أبريل (ترم 2)': false, 'مايو (ترم 2)': false, 'يونيو (ترم 2)': false
         };
 
@@ -264,7 +262,7 @@ class Student {
       );
 }
 
-// ================= شاشة الصفوف الرئيسية =================
+// ================= شاشة الصفوف الرئيسية (من الثالث للسادس الابتدائي) =================
 class GradesHomeDashboard extends StatelessWidget {
   final String teacherName;
   const GradesHomeDashboard({super.key, required this.teacherName});
@@ -336,7 +334,7 @@ class GradesHomeDashboard extends StatelessWidget {
             const Divider(),
             const Text('لمحة عن التطبيق:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.amberAccent)),
             const SizedBox(height: 6),
-            const Text('إدارة سنتر أستاذ أحمد الخولي - الأول على كلية الرياضيات.\nصنع بواسطة: حازم ناصر عبدالظاهر\n📞 01127485412', style: TextStyle(fontSize: 12, color: Colors.grey)),
+            const Text('إدارة سنتر الأستاذة رانيا حمدي - الأول على كلية التربية.\nصنع بواسطة: حازم ناصر عبدالظاهر\n📞 01127485412', style: TextStyle(fontSize: 12, color: Colors.grey)),
           ],
         ),
         actions: [
@@ -348,7 +346,13 @@ class GradesHomeDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> grades = ['الصف الأول الإعدادي', 'الصف الثاني الإعدادي', 'الصف الثالث الإعدادي'];
+    // تم التحديث هنا ليشمل الصف الثالث وحتى السادس الابتدائي
+    final List<String> grades = [
+      'الصف الثالث الابتدائي',
+      'الصف الرابع الابتدائي',
+      'الصف الخامس الابتدائي',
+      'الصف السادس الابتدائي',
+    ];
 
     return BallBackground(
       child: Scaffold(
@@ -359,8 +363,8 @@ class GradesHomeDashboard extends StatelessWidget {
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('أهلاً بك، $teacherName 🌟', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.amberAccent)),
-              const Text('الأول على كلية الرياضيات', style: TextStyle(fontSize: 11, color: Colors.grey)),
+              Text('أهلاً بكِ، $teacherName 🌟', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.amberAccent)),
+              const Text('الأول على كلية التربية', style: TextStyle(fontSize: 11, color: Colors.grey)),
             ],
           ),
           actions: [
@@ -434,7 +438,7 @@ class GradesHomeDashboard extends StatelessWidget {
   }
 }
 
-// ================= شاشة تفاصيل الصف والترم الأول والثاني =================
+// ================= شاشة تفاصيل الصف مع البحث والتنظيم الذكي للمجموعات =================
 class GradeDetailScreen extends StatefulWidget {
   final String gradeName;
   final double initialAmount;
@@ -650,7 +654,6 @@ class _GradeDetailScreenState extends State<GradeDetailScreen> with SingleTicker
     });
   }
 
-  // نافذة إدخال المبلغ المدفوع الفعلي وحساب الزيادة (باقي له) أو النقصان (باقي عليه)
   void _editStudentPaymentDialog(Student student) {
     final amountCtrl = TextEditingController(text: student.customPaidAmount.toString());
 
@@ -717,7 +720,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen> with SingleTicker
             else
               const Text('⚖️ الحساب متوازن تماماً', style: TextStyle(color: Colors.cyanAccent, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
-            const Text('🌟 تم الاعتماد من أستاذ أحمد الخولي', style: TextStyle(fontSize: 11, color: Colors.grey)),
+            const Text('🌟 تم الاعتماد من الأستاذة رانيا حمدي', style: TextStyle(fontSize: 11, color: Colors.grey)),
             const Text('صنع بواسطة: حازم ناصر عبدالظاهر (01127485412)', style: TextStyle(fontSize: 10, color: Colors.grey)),
           ],
         ),
@@ -786,7 +789,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen> with SingleTicker
         body: TabBarView(
           controller: _tabController,
           children: [
-            // التبويب الأول: الحضور والمجموعات
+            // التبويب الأول: الحضور والمجموعات مع البحث والتنظيم الذكي
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -853,13 +856,14 @@ class _GradeDetailScreenState extends State<GradeDetailScreen> with SingleTicker
                       children: [
                         ...groups.map((g) {
                           String gStr = '${g.days} (${g.timeFrom} إلى ${g.timeTo})';
+                          List<Student> groupStudents = displayedStudents.where((s) => s.groupDetails == gStr).toList();
+                          
                           return Card(
                             margin: const EdgeInsets.only(bottom: 10),
                             color: const Color(0xFF0F1720),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: Row(
+                            child: ExpansionTile(
+                              title: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
@@ -867,74 +871,72 @@ class _GradeDetailScreenState extends State<GradeDetailScreen> with SingleTicker
                                     children: [
                                       Text('مجموعة الأيام: ${g.days}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
                                       const SizedBox(height: 2),
-                                      Text('من ${g.timeFrom} إلى ${g.timeTo}', style: const TextStyle(color: Colors.cyanAccent, fontSize: 11)),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF2563EB), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 6)),
-                                        onPressed: () => setState(() => selectedFilter = gStr),
-                                        child: const Text('عرض', style: TextStyle(fontSize: 10)),
-                                      ),
-                                      const SizedBox(width: 4),
-                                      IconButton(
-                                        icon: const Icon(Icons.attach_money, color: Colors.amberAccent, size: 18),
-                                        tooltip: 'تعديل السعر',
-                                        onPressed: _editGradeAmountDialog,
-                                      ),
-                                      IconButton(icon: const Icon(Icons.edit, color: Colors.cyanAccent, size: 18), onPressed: () => _addGroupDialog(groupToEdit: g)),
-                                      IconButton(icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 18), onPressed: () => _deleteGroup(g)),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 6)),
-                                        onPressed: () => _addOrEditStudentDialog(gStr),
-                                        child: const Text('طالب', style: TextStyle(fontSize: 10)),
-                                      ),
+                                      Text('من ${g.timeFrom} إلى ${g.timeTo} (الطلاب: ${groupStudents.length})', style: const TextStyle(color: Colors.cyanAccent, fontSize: 11)),
                                     ],
                                   ),
                                 ],
                               ),
-                            ),
-                          );
-                        }),
-                        const Divider(color: Colors.white24, height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('قائمة الحضور والغياب:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.amberAccent)),
-                            Text('العدد: ${displayedStudents.length}', style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        ...displayedStudents.map((student) {
-                          return Card(
-                            margin: const EdgeInsets.only(bottom: 8),
-                            color: const Color(0xFF0F1720),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                            child: ListTile(
-                              title: Text(student.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                              subtitle: Text('المجموعة: ${student.groupDetails}\nالحالة: ${student.isPresent ? "حاضر (${student.attendanceTime})" : "غائب"}', 
-                                style: TextStyle(fontSize: 11, color: student.isPresent ? Colors.greenAccent : Colors.redAccent)),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  IconButton(icon: const Icon(Icons.chat, color: Colors.green, size: 18), onPressed: () => _openWhatsApp(student.phone)),
-                                  IconButton(icon: const Icon(Icons.edit, color: Colors.cyanAccent, size: 18), onPressed: () => _addOrEditStudentDialog(student.groupDetails, studentToEdit: student)),
-                                  IconButton(icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 18), onPressed: () => _deleteStudent(student)),
-                                  Switch(
-                                    value: student.isPresent,
-                                    activeColor: Colors.green,
-                                    inactiveThumbColor: Colors.redAccent,
-                                    onChanged: (val) {
-                                      setState(() {
-                                        student.isPresent = val;
-                                        student.attendanceTime = val ? DateFormat('hh:mm a').format(DateTime.now()) : '-';
-                                        _saveDataToDevice();
-                                      });
-                                    },
+                                  IconButton(
+                                    icon: const Icon(Icons.attach_money, color: Colors.amberAccent, size: 18),
+                                    tooltip: 'تعديل السعر',
+                                    onPressed: _editGradeAmountDialog,
+                                  ),
+                                  IconButton(icon: const Icon(Icons.edit, color: Colors.cyanAccent, size: 18), onPressed: () => _addGroupDialog(groupToEdit: g)),
+                                  IconButton(icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 18), onPressed: () => _deleteGroup(g)),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 6)),
+                                    onPressed: () => _addOrEditStudentDialog(gStr),
+                                    child: const Text('طالب+', style: TextStyle(fontSize: 10)),
                                   ),
                                 ],
                               ),
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: groupStudents.isEmpty 
+                                    ? const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text('لا يوجد طلاب في هذه المجموعة حالياً أو لا تطابق البحث', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                                      )
+                                    : Column(
+                                        children: groupStudents.map((student) {
+                                          return Card(
+                                            margin: const EdgeInsets.only(bottom: 8),
+                                            color: const Color(0xFF070D12),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                            child: ListTile(
+                                              title: Text(student.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                                              subtitle: Text('الحالة: ${student.isPresent ? "حاضر (${student.attendanceTime})" : "غائب"}', 
+                                                style: TextStyle(fontSize: 11, color: student.isPresent ? Colors.greenAccent : Colors.redAccent)),
+                                              trailing: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  IconButton(icon: const Icon(Icons.chat, color: Colors.green, size: 18), onPressed: () => _openWhatsApp(student.phone)),
+                                                  IconButton(icon: const Icon(Icons.edit, color: Colors.cyanAccent, size: 18), onPressed: () => _addOrEditStudentDialog(student.groupDetails, studentToEdit: student)),
+                                                  IconButton(icon: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 18), onPressed: () => _deleteStudent(student)),
+                                                  Switch(
+                                                    value: student.isPresent,
+                                                    activeColor: Colors.green,
+                                                    inactiveThumbColor: Colors.redAccent,
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        student.isPresent = val;
+                                                        student.attendanceTime = val ? DateFormat('hh:mm a').format(DateTime.now()) : '-';
+                                                        _saveDataToDevice();
+                                                      });
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                ),
+                              ],
                             ),
                           );
                         }),
@@ -944,7 +946,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen> with SingleTicker
                 ],
               ),
             ),
-            // التبويب الثاني: نظام الدفع والترمات (الترم الأول والترم الثاني وحساب الزيادة والنقصان)
+            // التبويب الثاني: نظام الدفع والترمات
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

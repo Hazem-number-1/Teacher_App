@@ -7,11 +7,11 @@ workflows:
       xcode: latest
       cocoapods: default
     scripts:
-      - name: Clean and get packages
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Upgrade Android Embedding & Build APK
         script: |
-          flutter clean
-          flutter pub get
-      - name: Build APK Release
-        script: flutter build apk --release --no-pub
+          flutter create --org com.example.teacherapp . --platforms=android
+          flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
